@@ -1,26 +1,49 @@
-# 🛰️ ISS Overhead Notifier
+# 🛰 ISS Overhead Notifier
 
-A Python project that uses real-time data from the ISS and your local sunrise/sunset time to notify you when the ISS is flying overhead and visible from your location.
-
----
-
-## 🌟 Features
-
-- **Tracks the International Space Station (ISS)** in real-time  
-- **Fetches your local sunrise and sunset times**  
-- **Sends an email notification** if the ISS is overhead and visible (i.e., it's night-time at your location)  
-- Utilizes **multiple APIs**: [Open Notify API](http://open-notify.org/Open-Notify-API/ISS-Location-Now/) and [Sunrise Sunset API](https://sunrise-sunset.org/api)
+A Python automation tool that sends you an email notification **only when the International Space Station (ISS) is overhead and it's dark outside**, so you can go outside and spot it in real time!
 
 ---
 
-## 🛠️ Tech Stack
+## ✨ Features
 
-- **Python 3**  
-- **SMTP (for sending emails)**  
-- **`requests` module**  
-- **`datetime` module**  
-- **Open Notify API** (for ISS location)  
-- **Sunrise-Sunset API** (for daylight hours)
+- **Live ISS Tracking**  
+  Uses the Open Notify API to get real-time ISS coordinates.
+
+- **Daylight Detection**  
+  Checks if it's dark at your location using the Sunrise-Sunset API.
+
+- **Email Alerts**  
+  Automatically emails you when conditions are perfect to view the ISS.
+
+- **Runs Forever**  
+  Uses a simple loop to keep checking every 60 seconds.
+
+---
+
+## 🛠 Tech Stack
+
+- Python 3
+- `requests` module
+- Open Notify API
+- Sunrise-Sunset API
+- SMTP (for email)
+
+---
+
+## 📦 Requirements
+
+This project uses the `requests` module to interact with external APIs.  
+Make sure to install it before running the project:
+
+```bash
+pip install requests
+```
+
+Alternatively, you can install everything listed in `requirements.txt`:
+
+```bash
+pip install -r requirements.txt
+```
 
 ---
 
@@ -28,30 +51,31 @@ A Python project that uses real-time data from the ISS and your local sunrise/su
 
 1. **Clone the Repository**
    ```bash
-   git clone https://github.com/your-username/iss-overhead-notifier.git
+   git clone https://github.com/sharmaaarush18/iss-overhead-notifier.git
    cd iss-overhead-notifier
    ```
 
-2. **Install Requirements**
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-3. **Configure Your Settings**
+2. **Set Your Coordinates & Email Credentials**
    - Open `main.py`
-   - Replace placeholders with:
-     - Your **latitude** and **longitude**
-     - Your **email credentials** (email, password, SMTP server info)
+   - Replace the latitude/longitude with your own location
+   - Add your email address and app password (or enable less secure apps)
 
-4. **Run the Script**
+3. **Run the Project**
    ```bash
    python main.py
    ```
 
-   - The script checks every 60 seconds:
-     - Is the ISS overhead?
-     - Is it dark outside?
-     - If **yes** to both: you'll get an email notification to go look up 👀
+4. **Leave It Running**  
+   It checks every minute whether:
+   - The ISS is within +5 or -5 degrees of your location
+   - It's currently dark outside  
+   If both are true, you’ll get an email alert! 🛰📩
+
+---
+
+## 🔐 Environment Variables (Optional but Recommended)
+
+To keep things secure, you can store your email credentials and location in a `.env` file and load them using `python-dotenv`.
 
 ---
 
@@ -61,10 +85,4 @@ This project is licensed under the [MIT License](LICENSE).
 
 ---
 
-## 🤓 Fun Fact
-
-The ISS travels at about 28,000 km/h — meaning it orbits Earth roughly every 90 minutes! 🚀
-
----
-
-### ❤️ Made with love by Aarush Sharma
+> ❤️ Made with love by Aarush Sharma
